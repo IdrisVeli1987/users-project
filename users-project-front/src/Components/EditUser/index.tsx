@@ -3,19 +3,16 @@ import axios from "axios";
 import { IUser } from "../../Interface/user";
 import toast, { Toaster } from "react-hot-toast";
 
-// Define the props interface with types for currentUserId and setCurrentUserId
 interface IProps {
   currentUserId: string | null;
   setCurrentUserId: (id: string | null) => void;
 }
 
-// Define the EditUser component
 const EditUser = ({ currentUserId, setCurrentUserId }: IProps) => {
-  const [currentUser, setCurrentUser] = useState<IUser | null>(null); // Typed as IUser or null
-  const [error, setError] = useState<string | null>(null); // Typed as string or null
-  const [formData, setFormData] = useState<IUser | null>(null); // Typed as IUser or null
+  const [currentUser, setCurrentUser] = useState<IUser | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [formData, setFormData] = useState<IUser | null>(null);
 
-  // Fetch user data on currentUserId change
   useEffect(() => {
     if (currentUserId) {
       const fetchUser = async () => {
@@ -25,7 +22,7 @@ const EditUser = ({ currentUserId, setCurrentUserId }: IProps) => {
             `${endpoint}/users/${currentUserId}`
           );
           setCurrentUser(data);
-          setFormData(data); // Pre-fill form data with fetched user
+          setFormData(data); 
         } catch (err) {
           setError("Failed to fetch user data");
         }
@@ -34,20 +31,17 @@ const EditUser = ({ currentUserId, setCurrentUserId }: IProps) => {
     }
   }, [currentUserId]);
 
-  // Handle form input change
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => (prev ? { ...prev, [name]: value } : null));
   };
 
-  // Handle form submission (PUT request to update user data)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Check if any required fields are empty
     if (!formData?.name || !formData?.surname || !formData?.email) {
-      toast.error("All fields are required!"); // Show toast error if any field is empty
-      return; // Prevent submission if fields are empty
+      toast.error("All fields are required!"); 
+      return; 
     }
 
     if (formData && currentUserId) {
@@ -58,8 +52,8 @@ const EditUser = ({ currentUserId, setCurrentUserId }: IProps) => {
           formData
         );
         if (res.status === 200 && res.statusText === "OK") {
-          setCurrentUserId(null); // Reset userId after successful update
-          setCurrentUser(null); // Reset current user data
+          setCurrentUserId(null); 
+          setCurrentUser(null); 
           toast.success("User updated successfully!");
         }
       } catch (err) {
@@ -68,14 +62,12 @@ const EditUser = ({ currentUserId, setCurrentUserId }: IProps) => {
     }
   };
 
-  // Cancel editing and reset currentUserId and formData
   const handleCancel = () => {
-    setCurrentUserId(null); // Reset userId
-    setCurrentUser(null); // Reset current user data
-    setFormData(null); // Reset form data
+    setCurrentUserId(null); 
+    setCurrentUser(null); 
+    setFormData(null); 
   };
 
-  // Show error message if an error occurs
   if (error) return <div>{error}</div>;
 
   return (
@@ -130,7 +122,7 @@ const EditUser = ({ currentUserId, setCurrentUserId }: IProps) => {
           </div>
         </form>
       )}
-      <Toaster position="top right" />
+      <Toaster position="top-right" />
     </div>
   );
 };
