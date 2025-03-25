@@ -35,7 +35,7 @@ const Users: React.FC<IProps> = ({ currentUserId, setCurrentUserId }) => {
 
   return (
     <ul className="h-[100vh] overflow-auto">
-      {users.map(({ id, name, surname, email }) => (
+      {users.map(({ id }, index) => (
         <li
           key={id}
           className="flex gap-4 items-center p-4 hover:bg-blue-100 cursor-pointer font-bold text-xl"
@@ -43,7 +43,8 @@ const Users: React.FC<IProps> = ({ currentUserId, setCurrentUserId }) => {
         >
           <FaUser className="text-blue-500" />
           <span>
-            {name} {surname} - {email}
+            Пользователь {index + 1}
+            {/* {name} {surname} - {email}  */}
           </span>
         </li>
       ))}
