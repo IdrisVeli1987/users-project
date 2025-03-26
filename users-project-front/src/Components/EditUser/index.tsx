@@ -72,26 +72,23 @@ const EditUser = ({ currentUserId, setCurrentUserId }: IProps) => {
   if (error) return <div>{error}</div>;
 
   const userNumber = currentUser?.id ? parseInt(currentUser.id) + 1 : "";
+  const userPosition = formData?.name ? formData.name : "Не указано";
 
   return (
-    <div className="max-w-lg w-full mx-auto p-4 bg-white rounded-lg ">
+    <div className="max-w-lg w-full mx-auto p-4 bg-white rounded-lg">
       <h2 className="text-center text-2xl font-bold mb-4">Edit User</h2>
       {currentUser && (
         <>
-          <span className="block text-lg font-semibold mb-2 border-4 border-indigo-500 pl-2">
+          <span className="flex justify-start text-lg font-semibold mb-2 border-4 border-indigo-500 pl-2 w-full">
             Пользователь {userNumber}
           </span>
 
           <div className="flex">
-            <div className="w-1/4">
-              <CgProfile className="text-gray-500 w-full h-full" />
-              
+            <div className="w-1/4 flex justify-center items-center">
+              <CgProfile className="text-gray-500 w-16 h-16" />
             </div>
 
-            <form
-              onSubmit={handleSubmit}
-              className="flex justify-center flex-col w-3/4"
-            >
+            <form onSubmit={handleSubmit} className="flex flex-col w-3/4 gap-4">
               <div className="flex items-center gap-4">
                 <label className="w-32 text-right">Должность:</label>
                 <div className="flex items-center flex-1 border rounded p-2">
@@ -101,6 +98,7 @@ const EditUser = ({ currentUserId, setCurrentUserId }: IProps) => {
                     value={formData?.name || ""}
                     onChange={handleInputChange}
                     className="flex-1 outline-none"
+                    placeholder="Не указано"
                   />
                 </div>
               </div>
@@ -112,6 +110,7 @@ const EditUser = ({ currentUserId, setCurrentUserId }: IProps) => {
                   value={formData?.surname || ""}
                   onChange={handleInputChange}
                   className="flex-1 p-2 border rounded"
+                  placeholder="Не указано"
                 />
               </div>
               <div className="flex items-center gap-4">
@@ -122,6 +121,7 @@ const EditUser = ({ currentUserId, setCurrentUserId }: IProps) => {
                   value={formData?.email || ""}
                   onChange={handleInputChange}
                   className="flex-1 p-2 border rounded"
+                  placeholder="Не указано"
                 />
               </div>
               <div className="flex justify-end gap-2 mt-4">
