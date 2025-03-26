@@ -81,61 +81,66 @@ const EditUser = ({ currentUserId, setCurrentUserId }: IProps) => {
           <span className="block text-lg font-semibold mb-2 border-4 border-indigo-500 pl-2">
             Пользователь {userNumber}
           </span>
-          <form
-            onSubmit={handleSubmit}
-            className="flex justify-center flex-col w-full"
-          >
-            <div className="flex items-center gap-4">
-              <div className="flex justify-center">
-                <CgProfile className="text-blue-500 w-6 h-6 mr-2 flex" />
+
+          <div className="flex">
+            <div className="w-1/4">
+              <CgProfile className="text-gray-500 w-full h-full" />
+              
+            </div>
+
+            <form
+              onSubmit={handleSubmit}
+              className="flex justify-center flex-col w-3/4"
+            >
+              <div className="flex items-center gap-4">
+                <label className="w-32 text-right">Должность:</label>
+                <div className="flex items-center flex-1 border rounded p-2">
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData?.name || ""}
+                    onChange={handleInputChange}
+                    className="flex-1 outline-none"
+                  />
+                </div>
               </div>
-              <label className="w-32 text-right">Должность:</label>
-              <div className="flex items-center flex-1 border rounded p-2">
+              <div className="flex items-center gap-4">
+                <label className="w-32 text-right">Отдел:</label>
                 <input
                   type="text"
-                  name="name"
-                  value={formData?.name || ""}
+                  name="surname"
+                  value={formData?.surname || ""}
                   onChange={handleInputChange}
-                  className="flex-1 outline-none"
+                  className="flex-1 p-2 border rounded"
                 />
               </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <label className="w-32 text-right">Отдел:</label>
-              <input
-                type="text"
-                name="surname"
-                value={formData?.surname || ""}
-                onChange={handleInputChange}
-                className="flex-1 p-2 border rounded"
-              />
-            </div>
-            <div className="flex items-center gap-4">
-              <label className="w-32 text-right">Компания:</label>
-              <input
-                type="text"
-                name="email"
-                value={formData?.email || ""}
-                onChange={handleInputChange}
-                className="flex-1 p-2 border rounded"
-              />
-            </div>
-            <div className="flex justify-end gap-2 mt-4">
-              <button
-                type="submit"
-                className="bg-blue-500 text-white p-2 rounded"
-              >
-                Save Changes
-              </button>
-              <button
-                type="button"
-                onClick={handleCancel}
-                className="bg-gray-500 text-white p-2 rounded"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
+              <div className="flex items-center gap-4">
+                <label className="w-32 text-right">Компания:</label>
+                <input
+                  type="text"
+                  name="email"
+                  value={formData?.email || ""}
+                  onChange={handleInputChange}
+                  className="flex-1 p-2 border rounded"
+                />
+              </div>
+              <div className="flex justify-end gap-2 mt-4">
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white p-2 rounded"
+                >
+                  Save Changes
+                </button>
+                <button
+                  type="button"
+                  onClick={handleCancel}
+                  className="bg-gray-500 text-white p-2 rounded"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
         </>
       )}
       <Toaster position="top-right" />
